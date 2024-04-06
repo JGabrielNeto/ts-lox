@@ -1,17 +1,9 @@
 import { readFileSync } from "fs";
+import { Scanner } from "./scanner";
+import { Token, token } from "./tokenType";
 
-type token = `${string}`;
 
-class Scanner {
-    source: string;
-    constructor(source: string) {
-        this.source = source;
-    }
-
-    scanTokens() {
-        return this.source.split(' ');
-    }
-}
+let hadError = false;
 
 function main(args: string[]) {
     if (args.length > 1) {
@@ -24,6 +16,7 @@ function main(args: string[]) {
     if (args.length == 0) {
         runPrompt();
     }
+    if (hadError) process.exit(65)
 }
 
 function runFile(path: string) {
@@ -32,23 +25,31 @@ function runFile(path: string) {
 }
 
 async function runPrompt() {
-    while (1) {
-        const prompt = '> '
-        process.stdout.write(prompt);
-        for await (const line of console) {
-            if (!line) break;
-            run(line);
-        }
+    const prompt = '\n> '
+    process.stdout.write(prompt);
+    for await (const line of console) {
+        run(line);
+        hadError = false
+        process.stdout.write(prompt)
     }
 }
 
 function run(source: string) {
     const scanner = new Scanner(source);
 
-    const tokens: token[] = scanner.scanTokens();
+    const tokens: Token[] = scanner.scanTokens();
     tokens.forEach((token) => {
-        process.stdout.write(token)
-    })
+        // process.stdout.write(token);
+    });
+}
+
+export function loxError(line: number, message: string) {
+    report(line, "", message);
+}
+
+function report(line: number, where: string, message: string) {
+    process.stderr.write(`[line ${line}] ERROR ${where}: ${message}`);
+    hadError = true;
 }
 
 main(process.argv.slice(2));
