@@ -16,7 +16,7 @@ function main(args: string[]) {
     if (args.length == 0) {
         runPrompt();
     }
-    if (hadError) process.exit(65)
+    if (hadError) process.exit(65);
 }
 
 function runFile(path: string) {
@@ -25,12 +25,12 @@ function runFile(path: string) {
 }
 
 async function runPrompt() {
-    const prompt = '\n> '
+    const prompt = '\n> ';
     process.stdout.write(prompt);
     for await (const line of console) {
         run(line);
-        hadError = false
-        process.stdout.write(prompt)
+        hadError = false;
+        process.stdout.write(prompt);
     }
 }
 
@@ -39,7 +39,7 @@ function run(source: string) {
 
     const tokens: Token[] = scanner.scanTokens();
     tokens.forEach((token) => {
-        // process.stdout.write(token);
+        console.log(`line ${token.line}: ${token.toString()}`);
     });
 }
 

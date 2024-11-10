@@ -76,7 +76,7 @@ class Token {
     }
 
     toString(): string {
-        return `${this.type} ${this.lexeme} ${this.literal}`;
+        return `TOKEN: ${tokenType[this.type]}: ${this.lexeme}`;
     }
 }
 

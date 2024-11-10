@@ -1,3 +1,5 @@
-print "test string"
-1 + 1
-var someValue = 12.2
+if (true) return false
+
+"this a string"
+123 + 532.2 / 2 - 12 * 56473.12313
+!= == {}

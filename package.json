@@ -1,6 +1,5 @@
 {
-  "dependencies": {},
   "devDependencies": {
-    "@types/bun": "^1.0.12"
+    "@types/bun": "^1.1.6"
   }
 }

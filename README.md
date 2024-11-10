@@ -5,6 +5,5 @@ Following the book [crafting interpreters](https://craftinginterpreters.com).
 
 Current chapter -> [Scanning](https://craftinginterpreters.com/scanning.html)
 
-> TODO:
-> - Test if it's scanning all tokens correctly.
-> - Use Regex
+This project is using bun.
+To run use `bun run src/index.ts` to open the REPL or pass a filepath.
